@@ -15,13 +15,24 @@ License:	ASL 2.0
 URL:		https://ros2.org
 Source0:	https://github.com/ament/%{reponame}/archive/%{gittag}/%{reponame}-%{version}.tar.gz
 
+%if 0%{?rhel}
+BuildRequires:	cmake3
+BuildRequires:  python34-devel
+BuildRequires:  python34-setuptools
+%else
 BuildRequires:	cmake
+BuildRequires:  python3-devel
+%endif
+
 BuildRequires:	ament-cmake-core
-BuildRequires:	python3
 
 Requires:	ament-cmake-core
 Requires:	ament-cmake-test
+%if 0%{?rhel}
+Requires:	python34-nose
+%else
 Requires:	python3-nose
+%endif
 
 %description
 %{summary}.
@@ -32,7 +43,11 @@ Requires:	python3-nose
 %build
 mkdir %{subpackage}/build
 pushd %{subpackage}/build
+%if 0%{?rhel}
+%cmake3 ..
+%else
 %cmake ..
+%endif
 popd
 
 %install

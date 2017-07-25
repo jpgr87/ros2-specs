@@ -15,9 +15,15 @@ License:	ASL 2.0
 URL:		https://ros2.org
 Source0:	https://github.com/ament/%{reponame}/archive/%{gittag}/%{reponame}-%{version}.tar.gz
 
+%if 0%{?rhel}
+BuildRequires:	cmake3
+BuildRequires:  python34-devel
+BuildRequires:  python34-setuptools
+%else
 BuildRequires:	cmake
+BuildRequires:  python3-devel
+%endif
 BuildRequires:	ament-cmake-core
-BuildRequires:	python3
 
 Requires:	ament-cmake-core
 
@@ -30,7 +36,11 @@ This package provides the ability to add tests in the ament buildsystem in CMake
 %build
 mkdir %{subpackage}/build
 pushd %{subpackage}/build
+%if 0%{?rhel}
+%cmake3 ..
+%else
 %cmake ..
+%endif
 popd
 
 %install

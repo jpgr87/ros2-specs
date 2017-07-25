@@ -1,9 +1,11 @@
-%global gittag release-beta2
-%global reponame ament_cmake
-%global subpackage ament_cmake
+%global gittag release-beta1
+%global reponame ament_lint
+%global pkgname @NAME@
+%global pkgnameu @NAMEU@
+%global subpackage ament_%{pkgnameu}
 %global __python %{__python3}
 
-Name:		ament-cmake
+Name:		ament-%{pkgname}
 Version:	0.0.0
 Release:	0.1.beta1%{?dist}
 Summary:	@DESC@
@@ -23,25 +25,8 @@ BuildRequires:  python3-devel
 %endif
 
 BuildRequires:	ament-cmake-core
-BuildRequires:	ament-cmake-export-dependencies
-
-%if 0%{?rhel}
-Requires:	cmake3
-%else
-Requires:	cmake
-%endif
-Requires:	ament-cmake-core
-Requires:	ament-cmake-export-definitions
-Requires:	ament-cmake-export-dependencies
-Requires:	ament-cmake-export-include-directories
-Requires:	ament-cmake-export-interfaces
-Requires:	ament-cmake-export-libraries
-Requires:	ament-cmake-export-link-flags
-Requires:	ament-cmake-libraries
-Requires:	ament-cmake-python
-Requires:	ament-cmake-target-dependencies
+BuildRequires:	ament-cmake-test
 Requires:	ament-cmake-test
-
 
 %description
 %{summary}.
